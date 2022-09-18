@@ -11,9 +11,10 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(SodiumWorldRenderer.class)
 public class SodiumWorldRendererVRMixin {
 
-    @ModifyVariable(at = @At("STORE"), ordinal = 0, method = "updateChunks")
-    public boolean RenderUpdate(boolean b) {
-        return true;
-    }
+    //TODO
+//    @ModifyVariable(at = @At("STORE"), ordinal = 0, method = "updateChunks")
+//    public boolean RenderUpdate(boolean b) {
+//        return true;
+//    }
 
 }

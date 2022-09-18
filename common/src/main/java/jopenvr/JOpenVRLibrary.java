@@ -112,7 +112,7 @@ public class JOpenVRLibrary implements Library
     static
     {
         try {
-            Native.register(JOpenVRLibrary.class, NativeLibrary.getInstance(JNA_LIBRARY_NAME));
+            Native.register(JOpenVRLibrary.class, NativeLibrary.getInstance("C:\\Users\\soren\\Documents\\Programming\\Minecraft\\VivecraftMod\\common\\src\\main\\resources\\natives\\win64\\openvr_api.dll"));
         } catch (UnsatisfiedLinkError error) {
             errored = true;
             System.out.println("Couldn't register VR!");

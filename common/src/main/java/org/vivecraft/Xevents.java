@@ -35,7 +35,7 @@ public interface Xevents {
 
     //    @ExpectPlatform
     public static void drawScreen(Screen screen, PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-
+        IPlatformService.INSTANCE.drawScreen(screen, poseStack, mouseX, mouseY, partialTick);
     }
 
 

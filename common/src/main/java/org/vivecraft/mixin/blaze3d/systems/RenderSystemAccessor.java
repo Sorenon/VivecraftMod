@@ -8,7 +8,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface RenderSystemAccessor {
 
     // needs remap because of forge
-    @Accessor(remap = false)
+    @Accessor
+//            (remap = false)
     static int[] getShaderTextures(){
         return null;
     }

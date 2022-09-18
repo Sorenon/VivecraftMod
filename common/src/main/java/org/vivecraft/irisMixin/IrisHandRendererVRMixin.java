@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //TODO Move rendering to here
 @Pseudo
-@Mixin(HandRenderer.class)
+@Mixin(value = HandRenderer.class, remap = false)
 public class IrisHandRendererVRMixin {
 
     @Inject(at = @At("HEAD"), method = "setupGlState", cancellable = true)

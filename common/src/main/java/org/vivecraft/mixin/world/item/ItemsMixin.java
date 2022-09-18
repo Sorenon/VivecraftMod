@@ -1,12 +1,10 @@
 package org.vivecraft.mixin.world.item;
 
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.vivecraft.crafting.VivecraftCrafting;
 
 @Mixin(Items.class)
 public class ItemsMixin {

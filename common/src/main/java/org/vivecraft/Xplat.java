@@ -15,28 +15,24 @@ public interface Xplat {
      * <p>
      * <a href="https://plugins.jetbrains.com/plugin/16210-architectury">You should also get the IntelliJ plugin to help with @ExpectPlatform.</a>
      */
-//    @ExpectPlatform
+
     static boolean isModLoaded(String name) {
-        return TMP.SERVICE.isModLoaded(name);
+        return IPlatformService.INSTANCE.isModLoaded(name);
     }
 
-    //    @ExpectPlatform
     static Path getConfigPath(String fileName) {
-        return TMP.SERVICE.getConfigPath(fileName);
+        return IPlatformService.INSTANCE.getConfigPath(fileName);
     }
 
-    //    @ExpectPlatform
     static boolean isDedicatedServer() {
-        return TMP.SERVICE.isDedicatedServer();
+        return IPlatformService.INSTANCE.isDedicatedServer();
     }
 
-    //    @ExpectPlatform
     static String getModloader() {
-        return TMP.SERVICE.getModloader();
+        return IPlatformService.INSTANCE.getModloader();
     }
 
-    //    @ExpectPlatform
     static String getModVersion() {
-        return TMP.SERVICE.getModVersion();
+        return IPlatformService.INSTANCE.getModVersion();
     }
 }
