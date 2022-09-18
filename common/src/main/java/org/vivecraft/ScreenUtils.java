@@ -12,6 +12,8 @@ public class ScreenUtils {
     //Vivecraft / OF
     public static List<AbstractWidget> getButtonList(Screen screen)
     {
+        System.out.println(TMP.class);
+
         List<AbstractWidget> list = new ArrayList<>();
 
         for (GuiEventListener guieventlistener : screen.children())

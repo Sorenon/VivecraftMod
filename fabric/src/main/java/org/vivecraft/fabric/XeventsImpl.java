@@ -5,9 +5,11 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class XeventsImpl {
 
+    @Nullable
     public static boolean renderBlockOverlay(Player player, PoseStack mat, BlockState state, BlockPos pos) {
         return false;
     }

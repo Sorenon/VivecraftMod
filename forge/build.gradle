@@ -1,100 +1,102 @@
-plugins {
-    id "com.github.johnrengelman.shadow" version "7.1.2"
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+    }
 }
+apply plugin: 'java'
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
 
-architectury {
-    platformSetupLoomIde()
-    forge()
-}
-loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
+archivesBaseName = "${mod_name}-forge-${minecraft_version}"
 
-    forge {
-        convertAccessWideners = true
-        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+minecraft {
+    mappings channel: 'official', version: minecraft_version
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
-        mixinConfig "vivecraft.vr.mixins.json"
-        mixinConfig "vivecraft.nonvr.mixins.json"
-        mixinConfig "vivecraft.sodium.mixins.json"
-        mixinConfig "vivecraft.forge.sodium.mixins.json"
-        mixinConfig "vivecraft.iris.mixins.json"
+    runs {
+        client {
+            workingDirectory project.file('run')
+            ideaModule "${rootProject.name}.${project.name}.main"
+            taskName 'Client'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            mods {
+                modClientRun {
+                    source sourceSets.main
+                    source project(":Common").sourceSets.main
+                }
+            }
+        }
 
-        mixinConfig "vivecraft.vr.forge.mixins.json"
-        mixinConfig "vivecraft.nonvr.forge.mixins.json"
+        server {
+            workingDirectory project.file('run')
+            ideaModule "${rootProject.name}.${project.name}.main"
+            taskName 'Server'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            mods {
+                modServerRun {
+                    source sourceSets.main
+                    source project(":Common").sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+            ideaModule "${rootProject.name}.${project.name}.main"
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            taskName 'Data'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            mods {
+                modDataRun {
+                    source sourceSets.main
+                    source project(":Common").sourceSets.main
+                }
+            }
+        }
     }
 }
 
-configurations {
-    common
-    shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
-    compileClasspath.extendsFrom common
-    runtimeClasspath.extendsFrom common
-    developmentForge.extendsFrom common
-}
-
+sourceSets.main.resources.srcDir 'src/generated/resources'
 
 dependencies {
-    forge "net.minecraftforge:forge:${rootProject.forge_version}"
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    compileOnly project(":Common")
 
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+    compileOnly(fg.deobf("maven.modrinth:rubidium:0.5.3a"))
+    compileOnly(fg.deobf("maven.modrinth:oculus:1.18.2-1.2.5a"))
+}
 
-    modRuntimeOnly("maven.modrinth:rubidium:0.5.3a")
-    modRuntimeOnly("maven.modrinth:oculus:1.18.2-1.2.5a")
+tasks.withType(JavaCompile) {
+    source(project(":Common").sourceSets.main.allSource)
 }
 
 processResources {
-    inputs.property "version", project.version
-
-    filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
-    }
+    from project(":Common").sourceSets.main.resources
 }
 
-shadowJar {
-    exclude "fabric.mod.json"
-    exclude "architectury.common.json"
 
-    configurations = [project.configurations.shadowCommon]
-    classifier "dev-shadow"
-}
-
-remapJar {
-    input.set shadowJar.archiveFile
-    dependsOn shadowJar
-    classifier null
-}
-
-remapJar {
-    archiveClassifier.set('forge')
-}
-
-jar {
-    classifier "dev"
-}
-
-sourcesJar {
-    def commonSources = project(":common").sourcesJar
-    dependsOn commonSources
-    from commonSources.archiveFile.map { zipTree(it) }
-}
-
-components.java {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
-        skip()
-    }
-}
+jar.finalizedBy('reobfJar')
 
 publishing {
     publications {
-        mavenForge(MavenPublication) {
-            artifactId = rootProject.archives_base_name + "-" + project.name
-            from components.java
+        mavenJava(MavenPublication) {
+            groupId project.group
+            artifactId project.archivesBaseName
+            version project.version
+            artifact jar
         }
     }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
-        // Add repositories to publish to here.
+        maven {
+            url "file://" + System.getenv("local_maven")
+        }
     }
 }

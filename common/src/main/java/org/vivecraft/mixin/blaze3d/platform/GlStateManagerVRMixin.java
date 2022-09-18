@@ -20,7 +20,7 @@ public class GlStateManagerVRMixin {
     }
 
     //Change the limit of textures to 32
-    @ModifyConstant(constant = @Constant(intValue = 12),method = "_getTextureId")
+    @ModifyConstant(constant = @Constant(intValue = 12),method = "_getTextureId", remap = false)
     private static int properId(int i) {
         return RenderSystemAccessor.getShaderTextures().length;
     }
@@ -30,7 +30,7 @@ public class GlStateManagerVRMixin {
      * @reason
      */
     // do remap because of forge
-    @Overwrite
+    @Overwrite(remap = false)
     public static void _blendFuncSeparate(int i, int j, int k, int l) {
         RenderSystem.assertOnRenderThread();
         if (j == GlStateManager.SourceFactor.SRC_ALPHA.value && j == GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value && k == GlStateManager.SourceFactor.ONE.value && l == GlStateManager.DestFactor.ZERO.value) {

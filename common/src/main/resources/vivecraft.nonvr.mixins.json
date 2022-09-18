@@ -34,5 +34,6 @@
   ],
   "server": [
   ],
-  "minVersion": "0.8.4"
+  "minVersion": "0.8.4",
+  "refmap": "vivecraft.refmap.json"
 }

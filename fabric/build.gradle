@@ -1,36 +1,35 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id 'fabric-loom' version "1.0-SNAPSHOT"
+    id 'maven-publish'
+    id 'idea'
 }
 
-architectury {
-    platformSetupLoomIde()
-    fabric()
-}
-
-loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
-}
-
-configurations {
-    common
-    shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
-    compileClasspath.extendsFrom common
-    runtimeClasspath.extendsFrom common
-    developmentFabric.extendsFrom common
-}
+archivesBaseName = "${mod_name}-fabric-${minecraft_version}"
 
 dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+//    mappings(loom.layered {
+//        it.addLayer(quiltMappings.mappings("org.quiltmc:quilt-mappings:${minecraft_version}+build.${rootProject.properties.quilt_mappings}:v2"))
+//        officialMojangMappings()
+//    })
+    mappings loom.officialMojangMappings()
+
+    //javax.annotation.*
+    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+    implementation(project(":Common")) { transitive false }
+
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
 
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+    modCompileOnly "maven.modrinth:sodium:mc1.18.2-0.4.1"
+    modCompileOnly "maven.modrinth:iris:1.18.x-v1.2.6"
+    modCompileOnly "maven.modrinth:lithium:mc1.18.2-0.7.10"
+    modCompileOnly "maven.modrinth:indium:1.0.7+mc1.18.2"
 
-    //modRuntimeOnly "maven.modrinth:sodium:mc1.18.2-0.4.1"
-    modRuntimeOnly "maven.modrinth:iris:1.18.x-v1.2.6"
     //modRuntimeOnly "maven.modrinth:indium:1.0.7+mc1.18.2"
     //modRuntimeOnly "maven.modrinth:create-fabric:1.18.2-0.5.0d-728"
     modRuntimeOnly "maven.modrinth:roughly-enough-items:8.3.529+fabric"
+//    modCompileOnly("maven.modrinth:rubidium:0.5.3a")
 
 
 //    modRuntimeOnly("io.github.fabricators_of_create:Porting-Lib:1.2.460-beta+1.18.2-dev.cca931b") //temp create
@@ -84,10 +83,31 @@ dependencies {
 //    include("org.lwjgl:lwjgl-glfw:3.2.2:natives-windows")
 //    include("org.lwjgl:lwjgl-stb:3.2.2:natives-windows")
 //    include("org.lwjgl:lwjgl-openal:3.2.2:natives-windows")
-
 }
 
+loom {
+    accessWidenerPath = file("src/main/resources/vivecraft.accesswidener")
+    mixin.defaultRefmapName = "vivecraft.refmap.json"
+
+    runs {
+        client {
+            client()
+            setConfigName("Fabric Client")
+            ideConfigGenerated(true)
+            runDir("run")
+        }
+        server {
+            server()
+            setConfigName("Fabric Server")
+            ideConfigGenerated(true)
+            runDir("run")
+        }
+    }
+}
+
+
 processResources {
+    from project(":Common").sourceSets.main.resources
     inputs.property "version", project.version
 
     filesMatching("fabric.mod.json") {
@@ -95,50 +115,23 @@ processResources {
     }
 }
 
-shadowJar {
-    exclude "architectury.common.json"
-
-    configurations = [project.configurations.shadowCommon]
-    classifier "dev-shadow"
-}
-
-remapJar {
-    injectAccessWidener = true
-    input.set shadowJar.archiveFile
-    dependsOn shadowJar
-    classifier null
-}
-
-remapJar {
-    archiveClassifier.set('fabric')
-}
-
-jar {
-    classifier "dev"
-}
-
-sourcesJar {
-    def commonSources = project(":common").sourcesJar
-    dependsOn commonSources
-    from commonSources.archiveFile.map { zipTree(it) }
-}
-
-components.java {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
-        skip()
-    }
+tasks.withType(JavaCompile) {
+    source(project(":Common").sourceSets.main.allSource)
 }
 
 publishing {
     publications {
-        mavenFabric(MavenPublication) {
-            artifactId = rootProject.archives_base_name + "-" + project.name
+        mavenJava(MavenPublication) {
+            groupId project.group
+            artifactId project.archivesBaseName
+            version project.version
             from components.java
         }
     }
 
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
-        // Add repositories to publish to here.
+        maven {
+            url "file://" + System.getenv("local_maven")
+        }
     }
 }

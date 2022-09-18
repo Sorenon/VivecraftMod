@@ -1,9 +1,5 @@
 package org.vivecraft;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.level.storage.LevelResource;
-
 import java.nio.file.Path;
 
 public interface Xplat {
@@ -19,29 +15,28 @@ public interface Xplat {
      * <p>
      * <a href="https://plugins.jetbrains.com/plugin/16210-architectury">You should also get the IntelliJ plugin to help with @ExpectPlatform.</a>
      */
-
-    @ExpectPlatform
+//    @ExpectPlatform
     static boolean isModLoaded(String name) {
-        return false;
+        return TMP.SERVICE.isModLoaded(name);
     }
 
-    @ExpectPlatform
+    //    @ExpectPlatform
     static Path getConfigPath(String fileName) {
-        return null;
+        return TMP.SERVICE.getConfigPath(fileName);
     }
 
-    @ExpectPlatform
+    //    @ExpectPlatform
     static boolean isDedicatedServer() {
-        return false;
+        return TMP.SERVICE.isDedicatedServer();
     }
 
-    @ExpectPlatform
+    //    @ExpectPlatform
     static String getModloader() {
-        return "";
+        return TMP.SERVICE.getModloader();
     }
 
-    @ExpectPlatform
+    //    @ExpectPlatform
     static String getModVersion() {
-        return "";
+        return TMP.SERVICE.getModVersion();
     }
 }

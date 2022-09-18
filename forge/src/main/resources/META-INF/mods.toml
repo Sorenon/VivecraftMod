@@ -5,7 +5,7 @@ license = "LGPLv3"
 
 [[mods]]
 modId = "vivecraft"
-version = "${version}"
+version="${file.jarVersion}"
 displayName = "Vivecraft"
 authors = "Me!"
 displayTest="IGNORE_ALL_VERSION"
