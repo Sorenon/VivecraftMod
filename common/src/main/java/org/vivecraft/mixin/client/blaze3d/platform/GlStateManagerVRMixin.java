@@ -19,29 +19,35 @@ public class GlStateManagerVRMixin {
         return 32;
     }
 
+    //TODO (Sorenon) figure out how why this is needed
     //Change the limit of textures to 32
     @ModifyConstant(constant = @Constant(intValue = 12),method = "_getTextureId")
     private static int properId(int i) {
         return RenderSystemAccessor.getShaderTextures().length;
     }
 
-    /**
-     * @author
-     * @reason
-     */
-    // do remap because of forge
-    @Overwrite
-    public static void _blendFuncSeparate(int i, int j, int k, int l) {
-        RenderSystem.assertOnRenderThread();
-        if (j == GlStateManager.SourceFactor.SRC_ALPHA.value && j == GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value && k == GlStateManager.SourceFactor.ONE.value && l == GlStateManager.DestFactor.ZERO.value) {
-            l = GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value;
-        }
-        if (i != BLEND.srcRgb || j != BLEND.dstRgb || k != BLEND.srcAlpha || l != BLEND.dstAlpha) {
-            BLEND.srcRgb = i;
-            BLEND.dstRgb = j;
-            BLEND.srcAlpha = k;
-            BLEND.dstAlpha = l;
-            glBlendFuncSeparate(i, j, k, l);
-        }
-    }
+    //TODO (Sorenon) figure out what this fixes, it's not the GUI thing I thought it was
+//    /**
+//     * @author
+//     * @reason
+//     */
+//    // do remap because of forge
+//    @Overwrite
+//    public static void _blendFuncSeparate(int i, int j, int k, int l) {
+//        // VIVECRAFT: correct bad blend function that trashes alpha channel
+//        RenderSystem.assertOnRenderThread();
+//        if (i == GlStateManager.SourceFactor.SRC_ALPHA.value
+//            && j == GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value
+//            && k == GlStateManager.SourceFactor.ONE.value
+//            && l == GlStateManager.DestFactor.ZERO.value) {
+//            l = GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value;
+//        }
+//        if (i != BLEND.srcRgb || j != BLEND.dstRgb || k != BLEND.srcAlpha || l != BLEND.dstAlpha) {
+//            BLEND.srcRgb = i;
+//            BLEND.dstRgb = j;
+//            BLEND.srcAlpha = k;
+//            BLEND.dstAlpha = l;
+//            glBlendFuncSeparate(i, j, k, l);
+//        }
+//    }
 }

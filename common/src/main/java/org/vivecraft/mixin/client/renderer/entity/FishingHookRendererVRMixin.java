@@ -1,5 +1,6 @@
 package org.vivecraft.mixin.client.renderer.entity;
 
+import org.vivecraft.VRState;
 import org.vivecraft.client.ClientDataHolder;
 import org.vivecraft.extensions.GameRendererExtension;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -27,6 +28,10 @@ public class FishingHookRendererVRMixin {
     @ModifyVariable(at = @At(value = "STORE", ordinal = 1),
             method = "render(Lnet/minecraft/world/entity/projectile/FishingHook;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", index = 25)
     private double fishingLineStartX(double value) {
+        if (!VRState.vrRenderPass) {
+            return value;
+        }
+
         int j = 1;
         if (currentlyRenderingFishingHook.getPlayerOwner().getMainHandItem().getItem() instanceof FishingRodItem)
         {
@@ -40,16 +45,25 @@ public class FishingHookRendererVRMixin {
     @ModifyVariable(at = @At(value = "STORE", ordinal = 1),
             method = "render(Lnet/minecraft/world/entity/projectile/FishingHook;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", index = 27)
     private double fishingLineStartY(double value) {
+        if (!VRState.vrRenderPass) {
+            return value;
+        }
         return CachedHandPos.y;
     }
     @ModifyVariable(at = @At(value = "STORE", ordinal = 1),
             method = "render(Lnet/minecraft/world/entity/projectile/FishingHook;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", index = 29)
     private double fishingLineStartZ(double value) {
+        if (!VRState.vrRenderPass) {
+            return value;
+        }
         return CachedHandPos.z;
     }
     @ModifyVariable(at = @At(value = "STORE", ordinal = 1),
             method = "render(Lnet/minecraft/world/entity/projectile/FishingHook;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", index = 31)
     private float fishingLineStartOffset(float value) {
+        if (!VRState.vrRenderPass) {
+            return value;
+        }
         return 0.0F;
     }
 }

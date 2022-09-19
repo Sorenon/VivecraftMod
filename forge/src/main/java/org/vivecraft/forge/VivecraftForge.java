@@ -2,11 +2,11 @@ package org.vivecraft.forge;
 
 import net.minecraftforge.fml.common.Mod;
 
-@Mod(Vivecraft.MODID)
-public class Vivecraft {
+@Mod(VivecraftForge.MODID)
+public class VivecraftForge {
     public static final String MODID = "vivecraft";
 
-    public Vivecraft() {
+    public VivecraftForge() {
 
     }
 }

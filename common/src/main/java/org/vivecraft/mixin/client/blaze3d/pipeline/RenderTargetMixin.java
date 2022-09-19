@@ -214,14 +214,7 @@ public abstract class RenderTargetMixin implements RenderTargetExtension {
 	public void addBufferTexture(int i, int j, boolean bl, CallbackInfo ci) {
 		GlStateManager._glFramebufferTexture2D(36160, 36128, 3553, this.depthBufferId, 0);
 	}
-
-
-	/**
-	 * @author
-	 * @reason
-	 */
-
-
+	
 	/**
 	 * @author
 	 * @reason

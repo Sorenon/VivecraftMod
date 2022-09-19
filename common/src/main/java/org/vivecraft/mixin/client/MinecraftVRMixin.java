@@ -58,6 +58,7 @@ import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.vivecraft.ModList;
 import org.vivecraft.client.ClientDataHolder;
 import org.vivecraft.client.GlStateHelper;
 import org.vivecraft.client.IrisHelper;
@@ -366,27 +367,6 @@ public abstract class MinecraftVRMixin extends ReentrantBlockableEventLoop<Runna
 		ClientDataHolder.getInstance().vrSettings.saveOptions();
 	}
 
-//	/**
-//	 * @author
-//	 * @reason
-//	 */
-//	@Overwrite
-//	private void rollbackResourcePacks(Throwable pThrowable) {
-//		if (this.resourcePackRepository.getSelectedPacks().stream().anyMatch(e -> !e.isRequired())) {
-//			TextComponent component;
-//			if (pThrowable instanceof SimpleReloadableResourceManager.ResourcePackLoadingFailure) {
-//				component = new TextComponent(
-//						((SimpleReloadableResourceManager.ResourcePackLoadingFailure) pThrowable).getPack().getName());
-//			} else {
-//				component = null;
-//			}
-//
-//			this.clearResourcePacksOnError(pThrowable, component);
-//		} else {
-//			Util.throwAsRuntime(pThrowable);
-//		}
-//	}
-
 	@Inject(at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;delayedCrash:Ljava/util/function/Supplier;", shift = Shift.BEFORE), method = "destroy()V")
 	public void destroy(CallbackInfo info) {
 		try {
@@ -398,11 +378,11 @@ public abstract class MinecraftVRMixin extends ReentrantBlockableEventLoop<Runna
 	
 	@Inject(at = @At("HEAD"), method = "runTick(Z)V", cancellable = true)
 	public void replaceTick(boolean bl, CallbackInfo callback)  {
-		if (Xplat.isModLoaded("sodium") || Xplat.isModLoaded("rubidium")) {
+		if (ModList.sodium || ModList.rubidium) {
 			SodiumHelper.preRenderMinecraft();
 		}
 		newRunTick(bl);
-		if (Xplat.isModLoaded("sodium") || Xplat.isModLoaded("rubidium")) {
+		if (ModList.sodium || ModList.rubidium) {
 			SodiumHelper.postRenderMinecraft();
 		}
 		callback.cancel();
@@ -785,6 +765,7 @@ public abstract class MinecraftVRMixin extends ReentrantBlockableEventLoop<Runna
 		return;
 	}
 
+	@Unique
 	public void drawProfiler() {
 		if (this.fpsPieResults != null) {
 			this.profiler.push("fpsPie");
@@ -793,8 +774,8 @@ public abstract class MinecraftVRMixin extends ReentrantBlockableEventLoop<Runna
 		}
 	}
 
-	@Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;swing(Lnet/minecraft/world/InteractionHand;)V"), method = "continueAttack(Z)V")
-	public void swingArmcontinueAttack(LocalPlayer player, InteractionHand hand) {
+	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;swing(Lnet/minecraft/world/InteractionHand;)V"), method = "continueAttack(Z)V")
+	public void swingArmcontinueAttack(boolean bl, CallbackInfo ci) {
 		((PlayerExtension) player).swingArm(InteractionHand.MAIN_HAND, VRFirstPersonArmSwing.Attack);
 	}
 

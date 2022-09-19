@@ -115,6 +115,13 @@ public abstract class LocalPlayerVRMixin extends AbstractClientPlayer implements
 		// TODO Auto-generated constructor stub
 	}
 
+	@Inject(at = @At("HEAD"), method = "getRopeHoldPosition", cancellable = true)
+	void overrideRopeHoldPos(float f, CallbackInfoReturnable<Vec3> cir) {
+		if ((Object)this == Minecraft.getInstance().player) {
+			cir.setReturnValue(ClientDataHolder.getInstance().vrPlayer.vrdata_world_render.getController(0).getPosition());
+		}
+	}
+
 	@Inject(at = @At("TAIL"), method = "startRiding")
 	public void startRidingTracker(Entity entity, boolean bl, CallbackInfoReturnable<Boolean> cir) {
 		ClientDataHolder.getInstance().vehicleTracker.onStartRiding(entity, (LocalPlayer) (Object) this);
@@ -176,9 +183,7 @@ public abstract class LocalPlayerVRMixin extends AbstractClientPlayer implements
 	@Override
 	public void swingArm(InteractionHand interactionhand, VRFirstPersonArmSwing interact) {
 		((ItemInHandRendererExtension) this.minecraft.getItemInHandRenderer()).setSwingType(interact);
-		this.swing(interactionhand);
 	}
-
 
 	@Inject(at = @At("HEAD"), method = "swing")
 	public void vrSwing(InteractionHand interactionHand, CallbackInfo ci) {

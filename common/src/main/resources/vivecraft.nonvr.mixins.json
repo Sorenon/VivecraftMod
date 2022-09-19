@@ -30,7 +30,6 @@
     "client.player.AbstractClientPlayerMixin",
     "client.renderer.block.LiquidBlockRendererMixin",
     "client.renderer.entity.EntityRenderDispatcherMixin"
-
-  ]
+  ],
   "minVersion": "0.8.4"
 }
