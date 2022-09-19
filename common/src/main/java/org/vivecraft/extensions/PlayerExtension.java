@@ -1,7 +1,7 @@
 package org.vivecraft.extensions;
 
 import net.minecraft.client.player.LocalPlayer;
-import org.vivecraft.render.VRFirstPersonArmSwing;
+import org.vivecraft.client.render.VRFirstPersonArmSwing;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;

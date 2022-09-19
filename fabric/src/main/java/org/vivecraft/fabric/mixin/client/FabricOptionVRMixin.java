@@ -1,6 +1,6 @@
 package org.vivecraft.fabric.mixin.client;
 
-import org.vivecraft.ClientDataHolder;
+import org.vivecraft.client.ClientDataHolder;
 import net.minecraft.client.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

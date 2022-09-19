@@ -1,6 +1,6 @@
 package org.vivecraft.irisMixin;
 
-import org.vivecraft.ClientDataHolder;
+import org.vivecraft.client.ClientDataHolder;
 import net.coderbot.iris.mixin.LevelRendererAccessor;
 import net.coderbot.iris.pipeline.ClearPass;
 import net.coderbot.iris.pipeline.newshader.NewWorldRenderingPipeline;

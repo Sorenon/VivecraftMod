@@ -1,6 +1,6 @@
 package org.vivecraft.mixin.client.renderer;
 
-import org.vivecraft.ClientDataHolder;
+import org.vivecraft.client.ClientDataHolder;
 import org.vivecraft.extensions.GameRendererExtension;
 import org.vivecraft.extensions.LevelRendererExtension;
 import org.vivecraft.extensions.RenderTargetExtension;
@@ -32,9 +32,9 @@ import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.vivecraft.gameplay.screenhandlers.KeyboardHandler;
-import org.vivecraft.render.RenderPass;
-import org.vivecraft.settings.VRSettings;
+import org.vivecraft.client.gameplay.screenhandlers.KeyboardHandler;
+import org.vivecraft.client.render.RenderPass;
+import org.vivecraft.client.settings.VRSettings;
 
 import javax.annotation.Nullable;
 

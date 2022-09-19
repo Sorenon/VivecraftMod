@@ -21,9 +21,9 @@
     "world.item.ItemsMixin"
   ],
   "client": [
-    "blaze3d.pipeline.MainTargetMixin",
-    "blaze3d.pipeline.RenderTargetMixin",
-    "blaze3d.systems.RenderSystemAccessor",
+    "client.blaze3d.pipeline.MainTargetMixin",
+    "client.blaze3d.pipeline.RenderTargetMixin",
+    "client.blaze3d.systems.RenderSystemAccessor",
     "client.MinecraftMixin",
     "client.main.MainMixin",
     "client.multiplayer.ClientPacketListenerMixin",
@@ -31,8 +31,6 @@
     "client.renderer.block.LiquidBlockRendererMixin",
     "client.renderer.entity.EntityRenderDispatcherMixin"
 
-  ],
-  "server": [
-  ],
+  ]
   "minVersion": "0.8.4"
 }

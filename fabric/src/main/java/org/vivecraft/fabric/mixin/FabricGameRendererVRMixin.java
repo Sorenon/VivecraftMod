@@ -1,17 +1,13 @@
 package org.vivecraft.fabric.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
 import com.mojang.math.Quaternion;
 import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.vivecraft.ClientDataHolder;
+import org.vivecraft.client.ClientDataHolder;
 import org.vivecraft.extensions.GameRendererExtension;
-import org.vivecraft.render.RenderPass;
 
 @Mixin(GameRenderer.class)
 public class FabricGameRendererVRMixin {

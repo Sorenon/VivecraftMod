@@ -8,8 +8,8 @@ import net.minecraft.network.chat.TextComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.vivecraft.ClientDataHolder;
-import org.vivecraft.settings.VRSettings;
+import org.vivecraft.client.ClientDataHolder;
+import org.vivecraft.client.settings.VRSettings;
 
 @Mixin(SoundOptionsScreen.class)
 public class SoundOptionsScreenVRMixin extends Screen {

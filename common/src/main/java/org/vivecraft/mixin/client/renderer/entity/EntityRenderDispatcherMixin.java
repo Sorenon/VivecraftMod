@@ -3,7 +3,6 @@ package org.vivecraft.mixin.client.renderer.entity;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import org.vivecraft.render.PlayerModelController;
-import org.vivecraft.render.VRPlayerRenderer;
+import org.vivecraft.client.render.PlayerModelController;
+import org.vivecraft.client.render.VRPlayerRenderer;
 
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;

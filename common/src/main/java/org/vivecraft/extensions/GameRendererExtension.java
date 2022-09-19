@@ -2,7 +2,7 @@ package org.vivecraft.extensions;
 
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.world.entity.LivingEntity;
-import org.vivecraft.render.RenderPass;
+import org.vivecraft.client.render.RenderPass;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Matrix4f;

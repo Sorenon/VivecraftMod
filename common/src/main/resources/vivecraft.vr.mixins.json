@@ -8,12 +8,12 @@
     "server.packs.repository.PackRepositoryVRMixin"
   ],
   "client": [
-    "blaze3d.audio.LibraryVRMixin",
-    "blaze3d.platform.InputConstantsVRMixin",
-    "blaze3d.platform.WindowVRMixin",
-    "blaze3d.platform.GlStateManagerVRMixin",
-    "blaze3d.systems.RenderSystemVRMixin",
-    "blaze3d.systems.RenderSystemAccessor",
+    "client.blaze3d.audio.LibraryVRMixin",
+    "client.blaze3d.platform.InputConstantsVRMixin",
+    "client.blaze3d.platform.WindowVRMixin",
+    "client.blaze3d.platform.GlStateManagerVRMixin",
+    "client.blaze3d.systems.RenderSystemVRMixin",
+    "client.blaze3d.systems.RenderSystemAccessor",
     "client.KeyboardHandlerVRMixin",
     "client.MinecraftVRMixin",
     "client.MouseHandlerVRMixin",
@@ -41,9 +41,7 @@
     "client.renderer.entity.MobRendererVRMixin",
     "client.renderer.NoSodiumLevelRendererVRMixin",
 
-    "world.entity.vehicle.BoatMixin"
-  ],
-  "server": [
+    "client.world.entity.vehicle.BoatMixin"
   ],
   "minVersion": "0.8.4"
 }

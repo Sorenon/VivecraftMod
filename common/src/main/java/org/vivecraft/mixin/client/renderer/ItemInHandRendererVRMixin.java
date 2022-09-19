@@ -3,7 +3,7 @@ package org.vivecraft.mixin.client.renderer;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import org.vivecraft.ClientDataHolder;
+import org.vivecraft.client.ClientDataHolder;
 import org.vivecraft.extensions.EntityRenderDispatcherExtension;
 import org.vivecraft.extensions.GameRendererExtension;
 import org.vivecraft.extensions.ItemInHandRendererExtension;
@@ -38,12 +38,12 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.vivecraft.gameplay.trackers.BowTracker;
-import org.vivecraft.gameplay.trackers.TelescopeTracker;
-import org.vivecraft.render.RenderPass;
-import org.vivecraft.render.VRArmRenderer;
-import org.vivecraft.render.VRFirstPersonArmSwing;
-import org.vivecraft.render.VivecraftItemRendering;
+import org.vivecraft.client.gameplay.trackers.BowTracker;
+import org.vivecraft.client.gameplay.trackers.TelescopeTracker;
+import org.vivecraft.client.render.RenderPass;
+import org.vivecraft.client.render.VRArmRenderer;
+import org.vivecraft.client.render.VRFirstPersonArmSwing;
+import org.vivecraft.client.render.VivecraftItemRendering;
 
 @Mixin(value = ItemInHandRenderer.class, priority = 999)
 public abstract class ItemInHandRendererVRMixin implements ItemInHandRendererExtension {

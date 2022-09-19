@@ -7,9 +7,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.vivecraft.ClientDataHolder;
+import org.vivecraft.client.ClientDataHolder;
 import org.vivecraft.CommonDataHolder;
-import org.vivecraft.gameplay.screenhandlers.GuiHandler;
+import org.vivecraft.client.gameplay.screenhandlers.GuiHandler;
 
 @Mixin(Minecraft.class)
 public class ForgeMinecraftVRMixin {

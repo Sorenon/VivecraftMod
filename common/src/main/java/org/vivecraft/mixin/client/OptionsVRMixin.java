@@ -1,7 +1,7 @@
 package org.vivecraft.mixin.client;
 
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.vivecraft.ClientDataHolder;
+import org.vivecraft.client.ClientDataHolder;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Options;
 import org.spongepowered.asm.mixin.Mixin;

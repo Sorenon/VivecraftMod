@@ -1,5 +1,7 @@
 package org.vivecraft;
 
+import org.vivecraft.NonVRMixinConfig;
+
 public class VRState {
     public static boolean isVR;
 
