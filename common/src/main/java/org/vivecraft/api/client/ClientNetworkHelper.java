@@ -15,7 +15,7 @@ import net.minecraft.world.phys.Vec3;
 import org.vivecraft.api.CommonNetworkHelper;
 import org.vivecraft.client.ClientDataHolder;
 import org.vivecraft.CommonDataHolder;
-import org.vivecraft.client.gameplay.VRPlayer;
+import org.vivecraft.client.vr.gameplay.VRPlayer;
 import org.vivecraft.client.render.PlayerModelController;
 import org.vivecraft.client.render.RenderPass;
 import org.vivecraft.client.settings.AutoCalibration;

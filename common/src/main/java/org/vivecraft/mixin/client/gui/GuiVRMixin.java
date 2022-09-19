@@ -1,8 +1,8 @@
 package org.vivecraft.mixin.client.gui;
 
+import net.minecraft.resources.ResourceLocation;
+import org.vivecraft.VRState;
 import org.vivecraft.client.ClientDataHolder;
-import org.vivecraft.client.SodiumHelper;
-import org.vivecraft.Xplat;
 import org.vivecraft.extensions.GuiExtension;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -50,46 +50,56 @@ public abstract class GuiVRMixin extends GuiComponent implements GuiExtension {
     @Shadow
     protected abstract Player getCameraPlayer();
 
-    //Moved to render for sodium
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderVignette(Lnet/minecraft/world/entity/Entity;)V"), method = "render")
-    public void noVignette(Gui instance, Entity entity) {
-        if(Xplat.isModLoaded("sodium") || Xplat.isModLoaded("rubidium")) {
-            SodiumHelper.vignette(false);
+    /**
+     * Skip rendering the vignette then setup the GUI rendering state
+     */
+    @Inject(method = "renderVignette", at = @At("HEAD"), cancellable = true)
+    void cancelRenderVignette(Entity entity, CallbackInfo ci) {
+        if (VRState.vrRenderPass) {
+            RenderSystem.enableDepthTest();
+            RenderSystem.defaultBlendFunc();
+            ci.cancel();
         }
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/CameraType;isFirstPerson()Z"), method = "render")
-    public boolean noFirstPerson(CameraType instance) {
-        return false;
+    @Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
+    void cancelRenderCrosshair(PoseStack matrices, CallbackInfo ci) {
+        if (VRState.vrRenderPass) {
+            ci.cancel();
+        }
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;getTicksFrozen()I"), method = "render")
-    public int noFrozen(LocalPlayer instance) {
-        return 0;
+    @Inject(method = "renderTextureOverlay", at = @At("HEAD"), cancellable = true)
+    void cancelrenderTextureOverlay(ResourceLocation texture, float opacity, CallbackInfo ci) {
+        if (VRState.vrRenderPass) {
+            ci.cancel();
+        }
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;hasEffect(Lnet/minecraft/world/effect/MobEffect;)Z"), method = "render")
-    public boolean noConfusion(LocalPlayer instance, MobEffect mobEffect) {
-        return true;
+    @Inject(method = "renderPortalOverlay", at = @At("HEAD"), cancellable = true)
+    void cancelRenderPortalOverlay(float nauseaStrength, CallbackInfo ci) {
+        if (VRState.vrRenderPass) {
+            ci.cancel();
+        }
     }
 
-//    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderCrosshair(Lcom/mojang/blaze3d/vertex/PoseStack;)V"), method = "render")
-//    public void noCrosshair(Gui instance, PoseStack poseStack) {
-//        return ;
-//    }
+    @Inject(method = "renderSpyglassOverlay", at = @At("HEAD"), cancellable = true)
+    void cancelRenderSpyglassOverlay(float nauseaStrength, CallbackInfo ci) {
+        if (VRState.vrRenderPass) {
+            ci.cancel();
+        }
+    }
 
+    //TODO move this
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/PlayerTabOverlay;render(Lcom/mojang/blaze3d/vertex/PoseStack;ILnet/minecraft/world/scores/Scoreboard;Lnet/minecraft/world/scores/Objective;)V"), method = "render")
     public void noTabList(PlayerTabOverlay instance, PoseStack poseStack, int i, Scoreboard scoreboard, Objective objective) {
         return ;
     }
 
-    @Inject(at = @At("HEAD"), method = "renderCrosshair", cancellable = true)
-    public void noRenderCrosshair(PoseStack poseStack, CallbackInfo ci) {
-        ci.cancel();
-    }
-
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;blit(Lcom/mojang/blaze3d/vertex/PoseStack;IIIIII)V", ordinal = 1, shift = At.Shift.AFTER), method = "renderHotbar")
     public void hotbarContext(float f, PoseStack poseStack, CallbackInfo ci) {
+        if (!VRState.vrRenderPass) return;
+
         int i = this.screenWidth / 2;
         if (ClientDataHolder.getInstance().interactTracker.hotbar >= 0 && ClientDataHolder.getInstance().interactTracker.hotbar < 9 && this.getCameraPlayer().getInventory().selected != ClientDataHolder.getInstance().interactTracker.hotbar) {
             RenderSystem.setShaderColor(0.0F, 1.0F, 0.0F, 1.0F);

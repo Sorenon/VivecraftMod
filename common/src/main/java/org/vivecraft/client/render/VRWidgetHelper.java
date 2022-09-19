@@ -22,7 +22,7 @@ import org.vivecraft.client.ClientDataHolder;
 import org.vivecraft.client.MethodHolder;
 import org.vivecraft.extensions.GameRendererExtension;
 import org.vivecraft.extensions.ItemInHandRendererExtension;
-import org.vivecraft.client.gameplay.trackers.CameraTracker;
+import org.vivecraft.client.vr.gameplay.trackers.CameraTracker;
 import org.vivecraft.client.settings.VRHotkeys;
 import org.vivecraft.client.settings.VRSettings;
 import org.vivecraft.utils.Utils;

@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.vivecraft.client.ClientDataHolder;
-import org.vivecraft.client.gameplay.trackers.CameraTracker;
-import org.vivecraft.client.gameplay.trackers.TelescopeTracker;
+import org.vivecraft.client.vr.gameplay.trackers.CameraTracker;
+import org.vivecraft.client.vr.gameplay.trackers.TelescopeTracker;
 
 @Mixin(ModelBakery.class)
 public abstract class FabricModelBakeryMixin {

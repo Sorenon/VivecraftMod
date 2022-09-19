@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -30,6 +31,7 @@ public class LibraryVRMixin {
     @Shadow
     private long currentDevice;
 
+    @Unique
     private static boolean checkALError(String string) {
         int i = AL10.alGetError();
         if (i != 0) {
@@ -40,6 +42,7 @@ public class LibraryVRMixin {
         }
     }
 
+    @Unique
     private static String alErrorToString(int i) {
         return switch (i) {
             case 40961 -> "Invalid name parameter.";

@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.vivecraft.client.ClientDataHolder;
 import org.vivecraft.CommonDataHolder;
-import org.vivecraft.client.gameplay.screenhandlers.GuiHandler;
+import org.vivecraft.client.vr.gameplay.screenhandlers.GuiHandler;
 
 @Mixin(Minecraft.class)
 public class FabricMinecraftVRMixin {

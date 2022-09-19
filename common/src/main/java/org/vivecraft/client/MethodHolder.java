@@ -1,7 +1,7 @@
 package org.vivecraft.client;
 
 import org.lwjgl.glfw.GLFW;
-import org.vivecraft.client.provider.InputSimulator;
+import org.vivecraft.client.vr.provider.InputSimulator;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Quaternion;

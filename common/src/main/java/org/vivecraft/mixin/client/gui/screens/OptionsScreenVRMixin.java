@@ -12,7 +12,7 @@ import net.minecraft.network.chat.TranslatableComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.vivecraft.client.gui.settings.GuiMainVRSettings;
+import org.vivecraft.client.vr.gui.settings.GuiMainVRSettings;
 
 @Mixin(OptionsScreen.class)
 public class OptionsScreenVRMixin extends Screen {

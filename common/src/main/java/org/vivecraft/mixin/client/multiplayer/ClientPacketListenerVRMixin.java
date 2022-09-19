@@ -32,8 +32,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import org.vivecraft.api.client.ClientNetworkHelper;
-import org.vivecraft.client.provider.ControllerType;
-import org.vivecraft.client.provider.openvr_jna.control.VivecraftMovementInput;
+import org.vivecraft.client.vr.provider.ControllerType;
+import org.vivecraft.client.vr.provider.openvr_jna.control.VivecraftMovementInput;
 import org.vivecraft.client.render.PlayerModelController;
 import org.vivecraft.client.settings.VRSettings;
 

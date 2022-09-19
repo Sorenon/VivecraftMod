@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.vivecraft.client.gameplay.screenhandlers.KeyboardHandler;
+import org.vivecraft.client.vr.gameplay.screenhandlers.KeyboardHandler;
 import org.vivecraft.client.render.RenderPass;
 import org.vivecraft.client.settings.VRSettings;
 

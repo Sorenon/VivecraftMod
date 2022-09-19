@@ -33,10 +33,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.vivecraft.api.client.ClientNetworkHelper;
-import org.vivecraft.client.gameplay.VRPlayer;
+import org.vivecraft.client.vr.gameplay.VRPlayer;
 import org.vivecraft.client.render.VRFirstPersonArmSwing;
-import org.vivecraft.client.utils.external.jinfinadeck;
-import org.vivecraft.client.utils.external.jkatvr;
+import org.vivecraft.client.vr.utils.external.jinfinadeck;
+import org.vivecraft.client.vr.utils.external.jkatvr;
 
 import com.mojang.authlib.GameProfile;
 

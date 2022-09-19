@@ -1,9 +1,9 @@
 package org.vivecraft.client.render;
 
 import org.vivecraft.client.ClientDataHolder;
-import org.vivecraft.client.gameplay.trackers.SwingTracker;
-import org.vivecraft.client.gameplay.trackers.TelescopeTracker;
-import org.vivecraft.client.provider.ControllerType;
+import org.vivecraft.client.vr.gameplay.trackers.SwingTracker;
+import org.vivecraft.client.vr.gameplay.trackers.TelescopeTracker;
+import org.vivecraft.client.vr.provider.ControllerType;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Quaternion;

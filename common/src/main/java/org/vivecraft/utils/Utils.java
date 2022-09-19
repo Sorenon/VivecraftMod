@@ -33,7 +33,7 @@ import javax.annotation.Nullable;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.vivecraft.client.render.VRShaders;
-import org.vivecraft.client.utils.LoaderUtils;
+import org.vivecraft.client.vr.utils.LoaderUtils;
 import org.vivecraft.utils.lwjgl.Matrix3f;
 import org.vivecraft.utils.lwjgl.Matrix4f;
 import org.vivecraft.utils.lwjgl.Vector2f;
