@@ -6,11 +6,7 @@
   "mixins": [
   ],
   "client": [
-    "FabricGameRendererVRMixin",
-    "FabricLevelRendererVRMixin",
-    "FabricMinecraftVRMixin",
-    "TitleScreenMixin",
-    "client.FabricOptionVRMixin"
+    "FabricGameRendererVRMixin"
   ],
   "server": [
   ],

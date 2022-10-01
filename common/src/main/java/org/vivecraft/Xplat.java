@@ -22,4 +22,9 @@ public interface Xplat {
     static String getModVersion() {
         return IPlatformService.INSTANCE.getModVersion();
     }
+
+    @ExpectPlatform
+    static boolean isModLoadedSuccess() {
+        return false;
+    }
 }

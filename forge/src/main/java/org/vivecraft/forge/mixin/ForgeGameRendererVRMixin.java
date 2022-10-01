@@ -14,7 +14,7 @@ import org.vivecraft.client.render.RenderPass;
 @Mixin(GameRenderer.class)
 public class ForgeGameRendererVRMixin {
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;setAnglesInternal(FF)V"), method = "renderLevel")
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;setAnglesInternal(FF)V", remap = false), method = "renderLevel")
     public void forgeInternal(Camera camera, float yaw, float pitch) {
         if(ClientDataHolder.getInstance().currentPass != RenderPass.LEFT && ClientDataHolder.getInstance().currentPass != RenderPass.RIGHT) {
             camera.setAnglesInternal(yaw, pitch);
