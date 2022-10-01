@@ -21,7 +21,7 @@ public class GlStateManagerVRMixin {
 
     //TODO (Sorenon) figure out how why this is needed
     //Change the limit of textures to 32
-    @ModifyConstant(constant = @Constant(intValue = 12),method = "_getTextureId")
+    @ModifyConstant(constant = @Constant(intValue = 12),method = "_getTextureId", remap = false)
     private static int properId(int i) {
         return RenderSystemAccessor.getShaderTextures().length;
     }

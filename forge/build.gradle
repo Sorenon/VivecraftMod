@@ -2,10 +2,6 @@ plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
-architectury {
-    platformSetupLoomIde()
-    forge()
-}
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
 
@@ -38,7 +34,7 @@ dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+    shadowCommon(project(path: ":common", configuration: "namedElements")) { transitive = false }
 
     modImplementation("maven.modrinth:rubidium:0.5.3a")
     modImplementation("maven.modrinth:oculus:1.18.2-1.2.5a")

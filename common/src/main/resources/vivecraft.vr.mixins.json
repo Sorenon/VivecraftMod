@@ -19,7 +19,6 @@
     "client.blaze3d.systems.RenderSystemAccessor",
     "client.blaze3d.systems.RenderSystemVRMixin",
     "client.gui.GuiVRMixin",
-    "client.gui.NoSodiumGuiVRMixin",
     "client.gui.components.EditBoxVRMixin",
     "client.gui.screens.OptionsScreenVRMixin",
     "client.gui.screens.PauseScreenVRMixin",

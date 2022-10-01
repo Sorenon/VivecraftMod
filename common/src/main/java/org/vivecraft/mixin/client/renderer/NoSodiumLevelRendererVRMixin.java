@@ -13,20 +13,20 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(LevelRenderer.class)
+@Mixin(value = LevelRenderer.class, priority = 10)
 public class NoSodiumLevelRendererVRMixin {
 
-    @Shadow
-    private boolean needsFullRenderChunkUpdate;
-
-    @Inject(at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/LevelRenderer;needsFullRenderChunkUpdate:Z", ordinal = 1, shift = At.Shift.AFTER), method = "setupRender(Lnet/minecraft/client/Camera;Lnet/minecraft/client/renderer/culling/Frustum;ZZ)V")
-    public void alwaysUpdateCull(Camera camera, Frustum frustum, boolean bl, boolean bl2, CallbackInfo info) {
-        //TODO (Sorenon) are we sure this is needed?
-        this.needsFullRenderChunkUpdate = VRState.vrRenderPass;
-    }
-
-    @ModifyConstant(method = "renderChunkLayer", constant = @Constant(intValue = 12))
-    public int moreTextures(int constant) {
-        return RenderSystemAccessor.getShaderTextures().length;
-    }
+//    @Shadow
+//    private boolean needsFullRenderChunkUpdate;
+//
+//    @Inject(at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/LevelRenderer;needsFullRenderChunkUpdate:Z", ordinal = 1, shift = At.Shift.AFTER), method = "setupRender(Lnet/minecraft/client/Camera;Lnet/minecraft/client/renderer/culling/Frustum;ZZ)V")
+//    public void alwaysUpdateCull(Camera camera, Frustum frustum, boolean bl, boolean bl2, CallbackInfo info) {
+//        //TODO (Sorenon) are we sure this is needed?
+//        this.needsFullRenderChunkUpdate = VRState.vrRenderPass;
+//    }
+//
+//    @ModifyConstant(method = "renderChunkLayer", constant = @Constant(intValue = 12))
+//    public int moreTextures(int constant) {
+//        return RenderSystemAccessor.getShaderTextures().length;
+//    }
 }

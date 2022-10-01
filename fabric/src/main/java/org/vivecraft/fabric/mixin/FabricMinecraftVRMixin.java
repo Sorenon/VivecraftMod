@@ -17,14 +17,6 @@ public class FabricMinecraftVRMixin {
     @Shadow
     public Screen screen;
 
-    @Inject(at = @At("HEAD"), method = "method_24040", remap = false)
-    public void menuInitvar(CallbackInfo ci) {
-        if (ClientDataHolder.getInstance().vrRenderer.isInitialized()) {
-            //DataHolder.getInstance().menuWorldRenderer.init();
-        }
-        ClientDataHolder.getInstance().vr.postinit();
-    }
-
     @Inject(at = @At("HEAD"), method = "method_24228", remap = false)
     public void reloadVar(CallbackInfo ci) {
 //		if (DataHolder.getInstance().menuWorldRenderer.isReady() && DataHolder.getInstance().resourcePacksChanged) {
