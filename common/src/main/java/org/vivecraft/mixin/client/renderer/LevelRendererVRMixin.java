@@ -1,7 +1,7 @@
 package org.vivecraft.mixin.client.renderer;
 
 import org.vivecraft.client.ClientDataHolder;
-import org.vivecraft.IrisHelper;
+import org.vivecraft.client.IrisHelper;
 import org.vivecraft.Xplat;
 import org.vivecraft.extensions.GameRendererExtension;
 import org.vivecraft.extensions.LevelRendererExtension;

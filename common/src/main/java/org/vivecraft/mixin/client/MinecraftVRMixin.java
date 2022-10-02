@@ -966,13 +966,14 @@ public abstract class MinecraftVRMixin extends ReentrantBlockableEventLoop<Runna
 	}
 
 	@Group(name = "initMenuworld", min = 1, max = 1)
-	@Inject(at = @At("HEAD"), method = "method_24040", remap = false, expect = 0)
-	public void menuInitvarFabric(CallbackInfo ci) {
+	@Inject(at = @At("HEAD"), method = "m_aaltpyph", remap = false, expect = 0)
+	public void resourcesLoadedeFabric(CallbackInfo ci) {
 		if (ClientDataHolder.getInstance().vrRenderer.isInitialized()) {
 			//DataHolder.getInstance().menuWorldRenderer.init();
 		}
 		ClientDataHolder.getInstance().vr.postinit();
 	}
+
 	@Group(name = "initMenuworld", min = 1, max = 1)
 	@Inject(at = @At("HEAD"), method = "lambda$new$2", remap = false, expect = 0)
 	public void menuInitvarForge(CallbackInfo ci) {
@@ -982,34 +983,10 @@ public abstract class MinecraftVRMixin extends ReentrantBlockableEventLoop<Runna
 		ClientDataHolder.getInstance().vr.postinit();
 	}
 
-	@Group(name = "reloadMenuworld", min = 1, max = 1)
-	@Inject(at = @At("HEAD"), method = "method_24228", remap = false, expect = 0)
-	public void reloadMenuworldFabric(CallbackInfo ci) {
-		reloadMenuworld();
-	}
-	@Group(name = "reloadMenuworld", min = 1, max = 1)
-	@Inject(at = @At("HEAD"), method = "lambda$reloadResourcePacks$18", remap = false, expect = 0)
-	public void reloadMenuworldForge(CallbackInfo ci) {
-		reloadMenuworld();
-	}
-
-	private void reloadMenuworld() {
-		//		if (DataHolder.getInstance().menuWorldRenderer.isReady() && DataHolder.getInstance().resourcePacksChanged) {
-//			try {
-//				DataHolder.getInstance().menuWorldRenderer.destroy();
-//				DataHolder.getInstance().menuWorldRenderer.prepare();
-//			} catch (Exception exception) {
-//				exception.printStackTrace();
-//			}
-//		}
-		CommonDataHolder.getInstance().resourcePacksChanged = false;
-	}
-
 	@Inject(at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "Lnet/minecraft/client/Minecraft;screen:Lnet/minecraft/client/gui/screens/Screen;", shift = At.Shift.BEFORE, ordinal = 0), method = "setScreen(Lnet/minecraft/client/gui/screens/Screen;)V")
 	public void gui(Screen pGuiScreen, CallbackInfo info) {
 		GuiHandler.onScreenChanged(this.screen, pGuiScreen, true);
 	}
-
 
 	private void drawNotifyMirror() {
 		if (System.currentTimeMillis() < this.mirroNotifyStart + this.mirroNotifyLen) {

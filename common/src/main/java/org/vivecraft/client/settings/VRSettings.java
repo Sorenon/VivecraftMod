@@ -5,8 +5,8 @@
 package org.vivecraft.client.settings;
 
 import org.vivecraft.client.ClientDataHolder;
-import org.vivecraft.IrisHelper;
 import org.vivecraft.Xplat;
+import org.vivecraft.client.IrisHelper;
 import org.vivecraft.extensions.OptionsExtension;
 import com.google.gson.JsonObject;
 import com.mojang.blaze3d.pipeline.RenderTarget;

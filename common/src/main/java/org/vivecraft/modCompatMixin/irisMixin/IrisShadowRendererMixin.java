@@ -3,7 +3,7 @@ package org.vivecraft.modCompatMixin.irisMixin;
 import net.minecraft.client.Camera;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.vivecraft.ClientDataHolder;
+import org.vivecraft.client.ClientDataHolder;
 import org.vivecraft.extensions.GameRendererExtension;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.coderbot.iris.mixin.LevelRendererAccessor;

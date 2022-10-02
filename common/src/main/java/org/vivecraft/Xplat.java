@@ -23,8 +23,7 @@ public interface Xplat {
         return IPlatformService.INSTANCE.getModVersion();
     }
 
-    @ExpectPlatform
     static boolean isModLoadedSuccess() {
-        return false;
+        return IPlatformService.INSTANCE.isModLoadedSuccess();
     }
 }

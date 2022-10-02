@@ -84,6 +84,7 @@ import org.vivecraft.client.render.RenderPass;
 import org.vivecraft.client.render.VRCamera;
 import org.vivecraft.client.render.VRWidgetHelper;
 import org.vivecraft.client.settings.VRSettings;
+import org.vivecraft.mixin.client.blaze3d.systems.RenderSystemAccessor;
 import org.vivecraft.utils.Utils;
 
 import java.nio.FloatBuffer;

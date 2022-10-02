@@ -2,7 +2,7 @@ package org.vivecraft.extensions.iris;
 
 import net.coderbot.iris.pipeline.WorldRenderingPipeline;
 import net.coderbot.iris.shadows.ShadowRenderTargets;
-import org.vivecraft.render.RenderPass;
+import org.vivecraft.client.render.RenderPass;
 
 public interface PipelineManagerExtension {
 

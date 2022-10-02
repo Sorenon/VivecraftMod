@@ -22,4 +22,7 @@ public interface IPlatformService {
     String getModVersion();
 
     void drawScreen(Screen screen, PoseStack poseStack, int mouseX, int mouseY, float partialTick);
+
+    boolean isModLoadedSuccess();
+
 }

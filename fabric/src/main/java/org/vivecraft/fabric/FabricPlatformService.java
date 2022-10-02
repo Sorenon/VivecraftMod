@@ -30,7 +30,10 @@ public class FabricPlatformService implements IPlatformService {
     }
 
     public String getModVersion() {
-        return FabricLoader.getInstance().getModContainer("vivecraft").get().getMetadata().getVersion().getFriendlyString();
+        if (isModLoadedSuccess()) {
+            return FabricLoader.getInstance().getModContainer("vivecraft").get().getMetadata().getVersion().getFriendlyString();
+        }
+        return "no version";
     }
 
     @Override
@@ -48,5 +51,10 @@ public class FabricPlatformService implements IPlatformService {
         if (Xplat.isModLoaded("architectury")) {
             ClientGuiEvent.RENDER_POST.invoker().render(screen, poseStack, mouseX, mouseY, partialTick);
         }
+    }
+
+    @Override
+    public boolean isModLoadedSuccess() {
+        return FabricLoader.getInstance().isModLoaded("vivecraft");
     }
 }
